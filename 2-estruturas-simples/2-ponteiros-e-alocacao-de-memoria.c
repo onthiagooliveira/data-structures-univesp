@@ -2,7 +2,7 @@
 #include <stdlib.h> // Padrão ANSI para malloc, free e exit
 
 /**
- * @file main.c
+ * @file 2-ponteiros-e-alocacao-de-memoria.c
  * @brief Estudo de alocação dinâmica e ponteiros.
  * * @note Notas de Aprendizado:
  * Em C há uma distinção bastante explícita entre um tipo (ou uma estrutura) e um endereço.

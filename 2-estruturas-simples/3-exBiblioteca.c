@@ -25,11 +25,15 @@ typedef struct {
 } Book;
 
 /**
- * @brief Limpa o buffer do teclado para evitar saltos na leitura de strings.
+ * @brief Esvazia o buffer de entrada (stdin).
+ * * Em C, ler um caractere e' o mesmo que remove-lo da "fila" (buffer) de entrada.
+ * Este laço consome e descarta cada byte remanescente na esteira do sistema 
+ * operacional ate' encontrar o caractere de nova linha ('\n') ou o fim do arquivo (EOF),
+ * garantindo que a proxima leitura (como um fgets) comece do zero.
  */
  void clearBuffer() {
   int c;
-  while ((c = getchar()) != '\n' && c != EOF);
+  while ((c = getchar()) != '\n' && c != EOF); // Varre o buffer a procura de "\n" ou End of File;
  }
 
 

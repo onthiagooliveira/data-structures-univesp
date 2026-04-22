@@ -1,5 +1,5 @@
 /**
- * @file main.c
+ * @file 1-estrutura.c
  * @brief Programa de exemplo para manipulação de estruturas com alocação dinâmica.
  */
 
