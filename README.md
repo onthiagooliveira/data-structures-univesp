@@ -43,10 +43,10 @@ Os principais pilares deste estudo são:
 
 ---
 
-## 🛠️ Convenções de Código Adotadas
+## Convenções de Código Adotadas
 
 * **Linguagem:** C (Padrão ANSI)
-* **Nomenclatura:** Variáveis e funções em Português.
+* **Nomenclatura:** Variáveis e funções em Inglês.
 * **Documentação:** Padrão **Doxygen** para cabeçalhos e descrições.
 * **Gerenciamento:** * Sempre utilizar `free()` após `malloc()`.
     * Limpeza de buffer sistemática após entradas do teclado.
