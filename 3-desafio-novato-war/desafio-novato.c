@@ -46,7 +46,7 @@ void registerTerritories() {
 
     for(int i = 0; i < MAX_TERRITORIES; i++) {
           printf("\n--- Adicionar Territorio ---\n");
-          printf("Territorios %d/%d\n", totalTerritories, MAX_TERRITORIES);
+          printf("Territorios %d/%d\n", totalTerritories + 1, MAX_TERRITORIES);
 
           printf("Nome do Territorio: \n");
           fgets(territories[totalTerritories].name, SIZE_STRING, stdin);
