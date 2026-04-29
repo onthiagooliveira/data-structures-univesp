@@ -1,5 +1,5 @@
 /**
- * @file desafio-novato.C
+ * @file 1-desafio-novato.C
  * @brief Sistema de Construção dos territórios | Jogo War
  * @date 2026
 */
@@ -11,7 +11,7 @@
 #define MAX_TERRITORIES 5
 /** @brief Tamanho máximo para os campos de texto. */
 #define SIZE_STRING 30
-/** @brief Tamanho máximo para o cmapo cor. */
+/** @brief Tamanho máximo para o cammpo cor. */
 #define SIZE_COLOR 10
 
 /**
@@ -27,6 +27,8 @@ typedef struct {
 // Variáveis Globais (Acessíveis por todas as funções)
 Territory territories[MAX_TERRITORIES];
 int totalTerritories = 0;
+bool attackingTerritory;
+bool defendingTerritory;
 
 /**
  * @brief Esvazia o buffer de entrada (stdin).
@@ -68,7 +70,7 @@ void registerTerritories() {
   }
 }
 
-/* @brief Exibe o mapa com os territorios cadastrados*/
+/** @brief Exibe o mapa com os territorios cadastrados*/
 void displayTerritories() {
   if(totalTerritories == 0) {
     printf("\nNao foram adicionados territorios.\n");
@@ -89,6 +91,7 @@ int main(void) {
       printf("========== Menu ==========\n");
       printf("1 | Definir Territorios\n");
       printf("2 | Mapa de Territorios\n");
+      
       printf("0 | Sair\n");
       printf("Escolha: ");
       
