@@ -21,17 +21,17 @@ Os principais pilares deste estudo são:
 - [x] Introdução à Disciplina
 - [ ] Tipos de Dados e Variáveis
 - [ ] Operadores e Expressões
-- [ ] Estruturas de Controle (Condicionais e Repetição)
+- [x] Estruturas de Controle (Condicionais e Repetição)
 
 ### Módulo 2: Modularização e Memória
 - [ ] Funções e Escopo
-- [ ] Introdução a Ponteiros
+- [x] Introdução a Ponteiros
 - [ ] Vetores e Strings
-- [ ] Alocação Dinâmica de Memória (malloc, free)
+- [x] Alocação Dinâmica de Memória (malloc, free)
 
 ### Módulo 3: Organização de Dados
-- [ ] Registros (Structs) e Tipos Abstratos de Dados (TAD)
-- [ ] Listas Lineares Sequenciais
+- [x] Registros (Structs) e Tipos Abstratos de Dados (TAD)
+- [x] Listas Lineares Sequenciais
 - [ ] Listas Ligadas (Simples e Duplas)
 - [ ] Pilhas e Filas
 
