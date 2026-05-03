@@ -22,7 +22,31 @@ typedef struct {
   char author[SIZE_STRING];
   int edition;
   char publisher[SIZE_STRING];
+  int availableForLoan;
 } Book;
+
+typedef struct {
+  int BookIndex;
+  char userName[SIZE_STRING];
+} Loan;
+
+
+/** @brief Variáveis globais */
+Book* library[MAX_BOOKS];
+int* totalBooks;
+int option = -1;
+
+
+/** Protótipo das funções
+* Declarar a função aqui permite que a 'main' as invoque antes de suas definições; */
+
+void clearBuffer();
+void menuDisplay();
+void addBook();
+void bookList();
+void bookLoan();
+void listLoans();
+void freeUpMemory();
 
 /**
  * @brief Esvazia o buffer de entrada (stdin).
@@ -36,19 +60,10 @@ typedef struct {
   while ((c = getchar()) != '\n' && c != EOF); // Varre o buffer a procura de "\n" ou End of File;
  }
 
-
- /**
- * @brief Ponto de entrada do sistema.
- * @return int 0 para execução normal.
- */
-int main(void) {
-  Book library[MAX_BOOKS]; // Array estático de structs
-  int totalBooks = 0;
-  int option = -1;
-
+ void menuDisplay() {
   do {
-      printf("\n--- BIBLIOTECA VIRTUAL ---\n");
-      printf("Livros cadastrados: %d|%d\n", totalBooks, MAX_BOOKS);
+      printf("\n--------- BIBLIOTECA VIRTUAL ---------\n");
+      printf("Livros cadastrados: %d|%d\n", ++(*totalBooks), MAX_BOOKS);
       printf("1 | Cadastrar Livro\n");
       printf("2 | Listar Livros\n");
       printf("0 | Sair\n");
@@ -64,40 +79,11 @@ int main(void) {
       switch (option) {
         
         case 1:
-          if (totalBooks < MAX_BOOKS) {
-            printf("\n--- Cadastro de Livro ---\n");
-
-            printf("Titulo: ");
-            fgets(library[totalBooks].title, SIZE_STRING, stdin);
-            // Remove o \n (enter) do final
-            library[totalBooks].title[strcspn(library[totalBooks].title, "\n")] = 0;
-
-            printf("Autor: ");
-            fgets(library[totalBooks].author, SIZE_STRING, stdin);
-            library[totalBooks].author[strcspn(library[totalBooks].author, "\n")] = 0;
-
-            printf("Edicao: ");
-            scanf("%d", &library[totalBooks].edition);
-            clearBuffer();
-
-            printf("Editora: ");
-            fgets(library[totalBooks].publisher, SIZE_STRING, stdin);
-            library[totalBooks].publisher[strcspn(library[totalBooks].publisher, "\n")] = 0;
-
-            totalBooks++;
-            printf("\nSucesso: Livro registrado\n");
-          } else {
-            printf("Erro: Capacidade da biblioteca esgotada.\n");
-          }
+          addBook();
         break;
 
         case 2:
-          printf("\n--- Listagem de Acervo ---\n");
-          if (totalBooks == 0) printf("Nenhum livro cadastrado.\n");
-
-          for(int i = 0; i < totalBooks; i++) {
-            printf("%d. [%s] | Autor: %s | Edicao: %d | Editora: %s \n", i + 1, library[i].title, library[i].author, library[i].edition, library[i].publisher);
-          }
+          bookList();
         break;
 
         case 0:
@@ -106,10 +92,68 @@ int main(void) {
 
         default:
           printf("Opcao invalida.\n");
-
       }
+  } while (option != 0);  
+};
 
-  } while (option != 0);
+/** @brief Função que regitra um livro na biblioteca */
+void addBook() {
+  if (*totalBooks < MAX_BOOKS){
+    if(library != NULL) {
+      while(option != 0) {
+        for (int i = 0; i < MAX_BOOKS; i++) {
+        /** @brief Aloca memória e zera os campos para inserção futura */
+        library[i] = (Book*) calloc(1, sizeof(Book)); 
+        
+        printf("\n--- Adiconar Livro ---\n");
+        printf("Titulo: ");
+        fgets(library[i]->title, SIZE_STRING, stdin);
+        // Remove o \n (enter) do final
+        library[i]->title[strcspn(library[i]->title, "\n")] = 0;
+        
+        printf("Autor: ");
+        fgets(library[i]->author, SIZE_STRING, stdin);
+        library[i]->author[strcspn(library[i]->author, "\n")] = 0;
 
+        printf("Edicao: ");
+        scanf("%d", &library[i]->edition);
+        clearBuffer();
+
+        printf("Editora: ");
+        fgets(library[i]->publisher, SIZE_STRING, stdin);
+        library[i]->publisher[strcspn(library[i]->publisher, "\n")] = 0;
+
+        printf("Disponibilidade: ");
+        scanf("%d", &library[i]->edition);
+        clearBuffer();
+        
+        *totalBooks++;
+        printf("\nSucesso: Livro registrado\n");
+        menuDisplay();
+      }
+      } 
+    } else {
+      printf("Erro: Capacidade da biblioteca esgotada.\n");
+    }
+  }
+}
+
+void bookList() {
+  printf("\n--- Listagem de Acervo ---\n");
+  if (totalBooks == 0) printf("Nenhum livro cadastrado.\n");
+  for(int i = 0; i < *totalBooks; i++) {
+    printf("%d. [%s] | Autor: %s | Edicao: %d | Editora: %s \n", i + 1, library[i]->title, library[i]->author, library[i]->edition, library[i]->publisher);
+  }
+}
+
+ 
+/**
+ * @brief Ponto de entrada do sistema.
+ * @return int 0 para execução normal.
+*/
+int main() {
+  totalBooks = (int*) calloc(1, sizeof(int));
+
+  menuDisplay();
   return 0;
 }
