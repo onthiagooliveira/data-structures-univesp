@@ -79,9 +79,9 @@ int sequencialSearch(LIST* l, KEYTYPE k) {
     int i = 0;
     while (i < l->elementNumber) {
         if (k == l->A[i].key) return i;
-        i++;
+        else i++;
     }
-    return -1;
+    return -1; // Elemento não existe 
 }
 
 
