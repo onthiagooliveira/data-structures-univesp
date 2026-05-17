@@ -10,7 +10,7 @@
  *   reduzindo drasticamente a complexidade para O(log N).
  * 
  * @note A eficiência da Busca Binária depende estritamente da Inserção Ordenada.
- */
+*/
 
 #include <stdio.h>
 #include <stdbool.h> // Necessário para o tipo 'bool'
