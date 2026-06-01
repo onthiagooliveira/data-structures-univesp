@@ -42,6 +42,8 @@
  */
 
 #include <stdio.h>
+#ifndef LISTA_ENCADEADA_H
+#define LISTA_ENCADEADA_H
 
 /** 
  * @brief Declaração de constantes de controle
@@ -229,8 +231,8 @@ void exibirLista(LISTA* l){
  *   Resultado: Interrompido no meio do caminho realizando apenas **3 comparações**.
  * 
  * @section COMPLEXIDADE (Métrica Big O)
- * - Pior Caso: $O(N)$ (Se a chave buscada for maior que o último elemento ou se estiver no fim).
- * - Caso Médio: $O(N/2)$ (A parada precoce corta o número de iterações pela metade em dados aleatórios).
+ * - Pior Caso: O(N)  Se a chave buscada for maior que o último elemento ou se estiver no fim).
+ * - Caso Médio: O(N²) A parada precoce corta o número de iterações pela metade em dados aleatórios).
  */
 int buscaSequencialOrdenada(LISTA* l, TIPOCHAVE ch) {
     int i = l->inicio; // Ponteiro lógico começa no primeiro elemento válido
@@ -483,3 +485,5 @@ bool excluirElemLista(LISTA* l, TIPOCHAVE ch) {
 void reinicializarLista(LISTA* l) {
     inicializarLista(l); // Delega o trabalho para a função de inicialização padrão
 }
+
+#endif
