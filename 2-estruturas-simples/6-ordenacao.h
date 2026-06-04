@@ -198,20 +198,24 @@ void bubbleSort(LISTA *l)
  * @param inicio Índice de onde a busca deve começar
  * @param n Quantidade total de elementos válidos
  * @return O índice físico (int) do menor elemento encontrado, ou -1 se erro.
-*/
-int posMenorEl(LISTA* l, int inicio) {
-  
-  int posMenor = -1;    // Começa assumindo um valor inválido por segurança
-  int n = tamanho(l);   // Função que retorna o tamanho da lista
+ */
+int posMenorEl(LISTA *l, int inicio)
+{
+
+  int posMenor = -1;  // Começa assumindo um valor inválido por segurança
+  int n = tamanho(l); // Função que retorna o tamanho da lista
 
   // Validação de segurança
-  if(l != NULL && inicio >= 0 && inicio < n) {
-    posMenor = inicio;  // Assume que o primeiro da fila é o menor
+  if (l != NULL && inicio >= 0 && inicio < n)
+  {
+    posMenor = inicio; // Assume que o primeiro da fila é o menor
 
     // Laço de varredura
-    for (int i = inicio + 1; i < n; i++) {
-      if(l->A[i].reg.chave < l->A[posMenor].reg.chave) {
-        posMenor = i;   // Atualiza o índice com o menor valor
+    for (int i = inicio + 1; i < n; i++)
+    {
+      if (l->A[i].reg.chave < l->A[posMenor].reg.chave)
+      {
+        posMenor = i; // Atualiza o índice com o menor valor
       }
     }
   }
@@ -223,13 +227,16 @@ int posMenorEl(LISTA* l, int inicio) {
  * @details Delega a busca pelo menor elemento para a função posMenorEl().
  * * @param l Ponteiro para a lista
  * * @param n Quantidade total de elementos válidos
-*/
-void selectionSortModular(LISTA* l, int n) {
+ */
+void selectionSortModular(LISTA *l, int n)
+{
   // Se a lista não existir ou tiver 1 elemento ou menos, saia.
-  if(l != NULL || n <= 1) return;
+  if (l != NULL || n <= 1)
+    return;
 
   // Laço principal que avança a fronteira da parte ordenada
-  for(int i = 0; i < n -1; i++) {
+  for (int i = 0; i < n - 1; i++)
+  {
 
     // Delega o trabalho pesado de buscar o índice para a função auxiliar
     int posMenor = posMenorEl(l, i);
@@ -239,8 +246,9 @@ void selectionSortModular(LISTA* l, int n) {
      * O if abaixo garante que só faremos esforço de memória (a troca física)
      * se a chave encontrada for ESTRITAMENTE MENOR que a chave atual.
      * Isso evita trocar um  número por ele mesmo.
-    */
-    if(posMenor != INVALIDO && l->A[posMenor].reg.chave < l->A[i].reg.chave) {
+     */
+    if (posMenor != INVALIDO && l->A[posMenor].reg.chave < l->A[i].reg.chave)
+    {
 
       // Swap (Troca física dos registros)
       REGISTRO aux = l->A[i].reg;
@@ -249,4 +257,74 @@ void selectionSortModular(LISTA* l, int n) {
     }
   }
 }
+
+/** *@brief Ordenação por Inserção (Insertion Sort)
+ * @details CONCEITO (Organizando Cartas)
+ * O algoritmo finge que o primeiro elemento já está ordenado. Depois, ele pega o segundo
+ * elemento e o "insere" na posição correta em relação ao primeiro.
+ * Em seguida, pega o terceiro e o insere na posição correta em relação aos dois primeiros,
+ * e assim por diante. Ele faz isso EMPURRANDO OS ELEMENTOS MAIORES PARA A DIREITA para
+ * abrir espaço para o elemento atual.
+ *
+ * *DIFERENCAL DESTE ALGORITMO (Deslocamento vs Troca):
+ * Note que dentro do laço 'while', nós NÃO fazemos o clássico "swap" (troca com variável
+ * auxiliar) que usávamos no Bubble e Selection. Nós simplesmente COPIAMOS o elemento anterior
+ * para a casa da frente ('v[j] = v[j-1]'). A inserção real (escrita do dado) só acontece uma
+ * vez por rodada, fora do 'while'.
+ *
+ * * @param l Ponteiro para a lista ordenada.
+ * * @param n tamanho total de elementos válidos no array.
+ *
+ * * @note ANÁLISE COMPARATIVA (Insetion vs. Selection):
+ * - O Selection Sort é cego e roda O(N²)sempre. O Insertion Sort é inteligente:
+ *   Se ele olha para trás e o vizinho  já for menor,  laço 'while' nem executa.
+ * - Isso torna o Insertion Sort o "Rei das Listas Quase Ordenadas". Se você adicionar
+ *   um item novo no final de uma lista já ordenada, o Insertion Sort arruma a lista em
+ *   tempo quase instantâneo.
+ *
+ * * @section COMPLEXIDADE (Métrica Big O)
+ * - Pior caso: O(N²)   (Se a lista estiver em ordem decrescente, ele terá que empurrar tudo).
+ * - Melhor caso: O(N)  (Se a lista já estiver ordenada, o 'while' nunca roda).
+ */
+void insertionSort(LISTA *l, int n)
+{
+  // Se a lista estiver vazia ou tiver apenas 1 elemento, já está ordenada.
+  if (l != NULL || n <= 1)
+    return;
+
+  // 'i' representa o elemento que estamos segurando na mão para inserir
+  for (int i = 1; i < n; i++)
+  {
+
+    // aux guarda a "carta" que retiramos da lista
+    REGISTRO aux = l->A[i].reg;
+
+    // 'j' será o nosso cursor para olhar as cartas que estão para trás
+    int j = i;
+
+    /**
+     * @section LAÇO DE DESLOCAMENTO (Abrindo Espaço)
+     * Enquanto j não bater o limite esquerdo (j > 0(indice)) e a carta que estamos segurando (aux) for
+     * menor que a carta anterior (j-1)...
+     */
+    while ((j > 0) && (aux.chave < l->A[j - 1].reg.chave))
+    {
+
+      // Empurramos a carta maior uma casa para a direita
+      l->A[j].reg.chave = l->A[j - 1].reg.chave;
+
+      // Andamos com o cursor para trás para continuar comparando
+      j--;
+    }
+
+    /**
+     * @section INSERÇÃO FINAL
+     * O espaço foi aberto. 'j' parou exatamente na gaveta onde a nossa carta 'aux' deve ser
+     * colocada.
+    */
+    l->A[j].reg = aux;
+        
+  }
+}
+
 #endif

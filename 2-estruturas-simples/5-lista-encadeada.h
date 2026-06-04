@@ -14,7 +14,7 @@
  * quantidade exata de memória a ser alocada não é conhecida na criação do programa, devendo ser
  * definida durante sua execução. Para estes casos pode-se alocar a memória necessária via alocação
  * dinâmica de memória. No entanto existem outros casos em que mais memória deve ser alocada para 
- * armazenar os dados do programa a medida que o programa vai sendo utilizado. Estes é um dos casos
+ * armazenar os dados do programa a medida que o programa vai sendo utilizado. Este é um dos casos
  * em que a utilização de listas ligadas é mais indicada do que a utilização de arrays estáticos ou 
  * dinâmicos. Outra vantagem das listas ligadas é que não existe nenhuma restrição indicando que
  * as células que as compõem devem estar alocadas sequencialmente na memória tal como ocorre em 
