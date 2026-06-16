@@ -62,8 +62,7 @@ typedef struct {
  * @brief Inicialização da Estrutura
  * @details 
  * - **O que faz:** Define o ponto de partida da lista.
- * - **Por trás do capô:** Atribui o valor `NULL` ao ponteiro `inicio`. Isso cria uma
- * lista conceitualmente vazia. Sem essa inicialização, o ponteiro conteria um
+ * - **Por trás do capô:** thu. Sem essa inicialização, o ponteiro conteria um
  * "endereço lixo" da memória, fazendo o programa tentar acessar regiões proibidas
  * (causando *Segmentation Fault*).
  * - **Complexidade:** O(1) — Tempo constante, uma única atribuição na memória.
